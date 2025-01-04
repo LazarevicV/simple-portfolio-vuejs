@@ -1,9 +1,13 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import { useToast } from 'primevue/usetoast';
+import { Toast } from 'primevue';
 
 export default defineComponent({
   name: 'BlogView',
+  components: {
+    Toast,
+  },
   setup() {
     const toast = useToast();
     const isShaking = ref(false);
@@ -12,7 +16,7 @@ export default defineComponent({
       toast.add({
         severity: 'contrast',
         summary: 'Sorry for the inconvenience',
-        detail: 'The blog page is currently under the process of development and is not yet up and running.',
+        detail: 'The blog page is currently under the process of development and is not yet fully up and running.',
         life: 5000, // Display duration in milliseconds
       });
 
@@ -35,6 +39,9 @@ export default defineComponent({
 
 <template>
   <div class="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-center">
+    <div class="notifikacija">
+      <Toast />
+    </div>
     <h1
       @click="showMessage"
       :class="{'shake': isShaking}"
