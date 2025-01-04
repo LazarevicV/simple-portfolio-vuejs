@@ -1,5 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import 'vue-router'
+
+declare module 'vue-router' {
+  interface RouteMeta {
+    title?: string
+  }
+}
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -8,9 +15,6 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView,
-      meta: {
-        title: "Portfolio | Home"
-      },
     },
     {
       path: '/about',
@@ -29,6 +33,14 @@ const router = createRouter({
       component: () => import('@/views/BlogView.vue'),
       meta: {
         title: "Portfolio | Blog"
+      },
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'not-found',
+      component: () => import('../views/NotFoundView.vue'),
+      meta: {
+        title: "Portfolio | Not Found"
       },
     }
   ],
